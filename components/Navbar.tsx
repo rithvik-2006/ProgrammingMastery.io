@@ -8,7 +8,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <nav className="w-full flex justify-between items-center  px-8">
+    <nav className="w-full flex justify-between items-center px-4">
       <Link href="/" className="text-2xl font-bold">
         Programming Mastery
       </Link>
