@@ -4,27 +4,55 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Navbar from "@/components/Navbar"
 
 interface DocItem {
   id: number
   title: string
   content: string
+  code?: string
 }
 
 const dummyDocs: DocItem[] = [
   {
     id: 1,
-    title: "Quick Sort Algorithm",
+    title: "Arrays",
     content:
-      "Quick Sort is a highly efficient sorting algorithm based on the divide-and-conquer approach. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot...",
+      "Arrays are fundamental data structures that store elements of the same type in contiguous memory locations",
+    code: "```python\nmy_array = [1, 2, 3, 4, 5]\nprint(my_array[2])  # Accessing element at index 2\nmy_array.append(6)  # Adding an element to the end\n```",
   },
   {
     id: 2,
-    title: "Binary Search Trees",
+    title: "Binary Search",
     content:
-      "A Binary Search Tree (BST) is a node-based binary tree data structure which has the following properties: The left subtree of a node contains only nodes with keys lesser than the node's key. The right subtree of a node contains only nodes with keys greater than the node's key...",
+      "Binary Search is an efficient algorithm for searching a sorted array by repeatedly dividing the search interval in half.",
+    code: "```python\ndef binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\n```"
   },
-  // Add more documentation items...
+  {
+    id: 3,
+    title: "Bubble Sort",
+    content:
+      "Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.",
+    code: "```python\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n - i - 1):\n            if arr[j] > arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n    return arr\n```"
+  },
+  {
+    id: 4,
+    title: "Linked Lists",
+    content: "Linked lists consist of nodes, where each node contains data and a reference to the next node.",
+    code: "```python\nclass Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nclass LinkedList:\n    def __init__(self):\n        self.head = None\n\n    def append(self, data):\n        new_node = Node(data)\n        if not self.head:\n            self.head = new_node\n            return\n        current = self.head\n        while current.next:\n            current = current.next\n        current.next = new_node\n```"
+  },
+  {
+    id: 5,
+    title: "Stacks",
+    content: "Stacks follow the Last-In-First-Out (LIFO) principle and are useful for managing function calls and undo operations.",
+    code: "```python\nclass Stack:\n    def __init__(self):\n        self.items = []\n\n    def push(self, item):\n        self.items.append(item)\n\n    def pop(self):\n        if not self.is_empty():\n            return self.items.pop()\n\n    def is_empty(self):\n        return len(self.items) == 0\n```"
+  },
+  {
+    id: 6,
+    title: "Queues",
+    content: "Queues follow the First-In-First-Out (FIFO) principle and are used in breadth-first search algorithms and task scheduling.",
+    code: "```python\nfrom collections import deque\n\nclass Queue:\n    def __init__(self):\n        self.items = deque()\n\n    def enqueue(self, item):\n        self.items.append(item)\n\n    def dequeue(self):\n        if not self.is_empty():\n            return self.items.popleft()\n\n    def is_empty(self):\n        return len(self.items) == 0\n```"
+  }
 ]
 
 export default function DocsPage() {
@@ -35,7 +63,8 @@ export default function DocsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Card className="w-full max-w-4xl mx-auto">
+      <Navbar/>
+      <Card className="w-full my-7 max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle>Documentation</CardTitle>
         </CardHeader>
@@ -66,7 +95,8 @@ export default function DocsPage() {
               {selectedDoc ? (
                 <>
                   <h3 className="text-xl font-semibold mb-2">{selectedDoc.title}</h3>
-                  <p>{selectedDoc.content}</p>
+                  <pre className="whitespace-pre-wrap">{selectedDoc.content}</pre>
+                  {selectedDoc.code && <pre className="whitespace-pre-wrap">{selectedDoc.code}</pre>}
                 </>
               ) : (
                 <p>Select a topic to view its content.</p>
@@ -78,4 +108,4 @@ export default function DocsPage() {
     </div>
   )
 }
-
+    

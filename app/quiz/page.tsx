@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { Progress } from "@/components/ui/progress"
 import { CheckCircle, XCircle } from "lucide-react"
+import Navbar from "@/components/Navbar"
 
 interface Question {
   id: number
@@ -51,6 +51,18 @@ const sampleQuiz: Question[] = [
     options: ["Encapsulation", "Inheritance", "Polymorphism", "Fragmentation"],
     correctAnswer: 3,
   },
+  {
+    id: 6,
+    question: "What sorting algorithm is best for nearly sorted data?",
+    options: ["QuickSort", "MergeSort", "BubbleSort", "InsertionSort"],
+    correctAnswer: 3,
+  },
+  {
+    id: 7,
+    question: "Which data structure allows insertion and deletion from both ends?",
+    options: ["Stack", "Queue", "Deque", "Linked List"],
+    correctAnswer: 2,
+  }
 ]
 
 export default function QuizPage() {
@@ -90,7 +102,6 @@ export default function QuizPage() {
   }
 
   const currentQuestionData = sampleQuiz[currentQuestion]
-  const progress = ((currentQuestion + 1) / sampleQuiz.length) * 100
 
   if (quizCompleted) {
     return (
@@ -102,7 +113,6 @@ export default function QuizPage() {
           <p className="text-2xl mb-4">
             Your score: {score} out of {sampleQuiz.length}
           </p>
-          <Progress value={(score / sampleQuiz.length) * 100} className="w-full h-3 mb-4" />
           <p className="mb-4">
             {score === sampleQuiz.length
               ? "Perfect score! You've mastered these concepts."
@@ -116,7 +126,8 @@ export default function QuizPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Card className="w-full max-w-2xl mx-auto">
+      <Navbar/>
+      <Card className="w-full my-7 max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>Advanced Programming Concepts Quiz</CardTitle>
           <CardDescription>
@@ -124,7 +135,6 @@ export default function QuizPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Progress value={progress} className="w-full h-3 mb-4" />
           <p className="text-lg mb-4">{currentQuestionData.question}</p>
           <RadioGroup
             value={selectedAnswer?.toString()}
@@ -145,9 +155,7 @@ export default function QuizPage() {
           )}
           {showExplanation && (
             <div className="mt-4">
-              <div
-                className={`p-4 rounded-md ${selectedAnswer === currentQuestionData.correctAnswer ? "bg-green-100 dark:bg-green-900" : "bg-red-100 dark:bg-red-900"}`}
-              >
+              <div className={`p-4 rounded-md ${selectedAnswer === currentQuestionData.correctAnswer ? "bg-green-100 dark:bg-green-900" : "bg-red-100 dark:bg-red-900"}`}>
                 {selectedAnswer === currentQuestionData.correctAnswer ? (
                   <div className="flex items-center">
                     <CheckCircle className="text-green-500 mr-2" />
@@ -172,4 +180,3 @@ export default function QuizPage() {
     </div>
   )
 }
-

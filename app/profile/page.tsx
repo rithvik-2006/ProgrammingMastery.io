@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import Navbar from "@/components/Navbar"
 
 interface UserProgress {
   quizzesTaken: number
@@ -21,7 +22,8 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Card className="w-full max-w-2xl mx-auto">
+      <Navbar/>
+      <Card className="w-full my-7 max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>Your Profile</CardTitle>
         </CardHeader>
