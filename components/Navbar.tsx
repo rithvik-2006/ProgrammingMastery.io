@@ -8,13 +8,16 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <nav className="w-full flex justify-between items-center px-4">
+    <nav className="w-full flex justify-between items-center px-2">
       <Link href="/" className="text-2xl font-bold">
         Programming Mastery
       </Link>
       <div className="flex items-center space-x-4">
         <Link href="/quiz" className="hover:text-primary">
           Quiz
+        </Link>
+        <Link href="/ChatBot" className="hover:text-primary">
+          ChatBot
         </Link>
         <Link href="/docs" className="hover:text-primary">
           Docs
