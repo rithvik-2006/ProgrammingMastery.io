@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { User, Bot } from "lucide-react"
+import Navbar from "@/components/Navbar"
 
 interface Message {
   text: string
@@ -46,7 +47,8 @@ export default function ChatbotPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Card className="w-full max-w-2xl mx-auto">
+        <Navbar/>
+      <Card className="w-full mt-10 max-w-2xl mx-auto">
         <CardHeader>
           <CardTitle>AI Programming Assistant</CardTitle>
         </CardHeader>
