@@ -42,7 +42,7 @@ export default function QuizPage() {
         </Card>
         <Card className="w-80 text-center shadow-lg p-4">
           <CardHeader>
-            <CardTitle>Blockchain</CardTitle>
+            <CardTitle>Blockchain Quiz</CardTitle>
           </CardHeader>
           <CardContent>
             <Link href="/Quiz/Blockchain">
