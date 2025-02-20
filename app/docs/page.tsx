@@ -95,35 +95,30 @@ const dummyDocs: DocItem[] = [
       "Depth-First Search (DFS) is a graph traversal algorithm that explores as far as possible along a branch before backtracking.",
     code: "```python\ndef dfs(graph, vertex, visited=None):\n    if visited is None:\n        visited = set()\n    if vertex not in visited:\n        print(vertex, end=' ')\n        visited.add(vertex)\n        for neighbor in graph[vertex]:\n            dfs(graph, neighbor, visited)\n```",
   },
+  
   {
     id: 11,
-    title: "Bubble Sort",
-    content:
-      "Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.",
-    code: "```python\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n - i - 1):\n            if arr[j] > arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n    return arr\n```",
-  },
-  {
-    id: 12,
     title: "Selection Sort",
     content:
       "Selection Sort repeatedly finds the minimum element and places it in the correct position.",
     code: "```python\ndef selection_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        min_idx = i\n        for j in range(i+1, n):\n            if arr[j] < arr[min_idx]:\n                min_idx = j\n        arr[i], arr[min_idx] = arr[min_idx], arr[i]\n    return arr\n```",
   },
   {
-    id: 13,
+    id: 12,
     title: "Insertion Sort",
     content:
       "Insertion Sort builds a sorted list one element at a time by inserting elements into their correct position.",
     code: "```python\ndef insertion_sort(arr):\n    n = len(arr)\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n    return arr\n```",
   },
   {
-    id: 14,
+    id: 13,
     title: "Heap Sort",
     content:
       "Heap Sort is a comparison-based sorting algorithm that uses a binary heap structure to sort elements.",
     code: "```python\ndef heapify(arr, n, i):\n    largest = i\n    left = 2 * i + 1\n    right = 2 * i + 2\n    if left < n and arr[largest] < arr[left]:\n        largest = left\n    if right < n and arr[largest] < arr[right]:\n        largest = right\n    if largest != i:\n        arr[i], arr[largest] = arr[largest], arr[i]\n        heapify(arr, n, largest)\n\ndef heap_sort(arr):\n    n = len(arr)\n    for i in range(n // 2 - 1, -1, -1):\n        heapify(arr, n, i)\n    for i in range(n - 1, 0, -1):\n        arr[0], arr[i] = arr[i], arr[0]\n        heapify(arr, i, 0)\n    return arr\n```"
   }
 ];
+
 
 
 
@@ -170,63 +165,34 @@ export default function DocsPage() {
             <div>
               {selectedDoc ? (
                 <>
-
-                  <p>{selectedDoc.content}</p>
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      code({ node, className, children, ...props }) {
-                        const match = /language-(\w+)/.exec(className || "");
-                        return match ? (
-                          <SyntaxHighlighter
-                            style={{ ...dark, 'code[class*="language-"]': { background: 'inherit' } }}
-                            language={match[1]}
-                            PreTag="div"
-                            {...props}
-                          >
-                            {String(children).replace(/\n$/, "")}
-                          </SyntaxHighlighter>
-                        ) : (
-                          <code className={className} {...props}>{children}</code>
-                        );
-                      },
-                    }}
-                  >
-                    {selectedDoc.code}
-                  </ReactMarkdown>
-=======
+                  <h2 className="text-xl font-bold mb-4">{selectedDoc.title}</h2>
+                  <p className="mb-4">{selectedDoc.content}</p>
+                  {selectedDoc.code && (
                     <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      code({ node, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || "");
-                      return match ? (
-                        <SyntaxHighlighter
-                        style={
-                          {
-                          ...dark,
-                          'code[class*="language-"]': {
-                            background: 'inherit',
-                          },
-                          } as unknown as PrismStyle
-                        }
-                        language={match[1]}
-                        PreTag="div"
-                        {...props}
-                        >
-                        {String(children).replace(/\n$/, "")}
-                        </SyntaxHighlighter>
-                      ) : (
-                        <code className={className} {...props}>
-                        {children}
-                        </code>
-                      );
-                      },
-                    }}
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        code({ node, inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || "");
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              style={dark}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            >
+                              {String(children).replace(/\n$/, "")}
+                            </SyntaxHighlighter>
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          );
+                        },
+                      }}
                     >
-                    {selectedDoc.code}
+                      {selectedDoc.code}
                     </ReactMarkdown>
-
+                  )}
                 </>
               ) : (
                 <p>Select a topic to view its content.</p>

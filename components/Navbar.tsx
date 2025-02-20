@@ -22,9 +22,9 @@ export default function Navbar() {
         <Link href="/docs" className="hover:text-primary">
           Docs
         </Link>
-        <Link href="/profile" className="hover:text-primary">
+        {/* <Link href="/profile" className="hover:text-primary">
           Profile
-        </Link>
+        </Link> */}
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="p-2 rounded-full bg-primary text-primary-foreground"
