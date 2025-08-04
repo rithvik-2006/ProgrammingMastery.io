@@ -15,7 +15,7 @@ export default function QuizPage() {
             <CardTitle>AI Quiz</CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href="/Quiz/AI">
+            <Link href="/quiz/AI">
               <Button className="w-full my-4">Start AI Quiz</Button>
             </Link>
           </CardContent>
@@ -25,7 +25,7 @@ export default function QuizPage() {
             <CardTitle>DSA Quiz</CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href="/Quiz/DSA">
+            <Link href="/quiz/DSA">
               <Button className="w-full my-4">Start DSA Quiz</Button>
             </Link>
           </CardContent>
@@ -35,7 +35,7 @@ export default function QuizPage() {
             <CardTitle>DBMS Quiz</CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href="/Quiz/DBMS">
+            <Link href="/quiz/DBMS">
               <Button className="w-full my-4">Start DBMS Quiz</Button>
             </Link>
           </CardContent>
@@ -45,8 +45,8 @@ export default function QuizPage() {
             <CardTitle>Blockchain Quiz</CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href="/Quiz/Blockchain">
-              <Button className="w-full my-4">Start Blockchian Quiz</Button>
+            <Link href="/quiz/Blockchain">
+              <Button className="w-full my-4">Start Blockchain Quiz</Button>
             </Link>
           </CardContent>
         </Card>

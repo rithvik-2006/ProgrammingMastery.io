@@ -14,7 +14,7 @@ interface Message {
   sender: "user" | "bot"
 }
 //AIzaSyDMBdH1PLNQEhQjZUUvONKHLh7iPsJzmxg
-const genAI = new GoogleGenerativeAI("AIzaSyDMBdH1PLNQEhQjZUUvONKHLh7iPsJzmxg")
+const genAI = new GoogleGenerativeAI(process.env.googleGenAI as string)
 
 export default function ChatbotPage() {
   const [messages, setMessages] = useState<Message[]>([
